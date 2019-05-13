@@ -1,0 +1,43 @@
+# Icon
+favicon: /favicon.ico
+# SEO
+keywords: Hexo, Gruntjs, Nodejs, Reactjs, Vuejs
+# Header
+page_background: http://callfiles.ueibo.com/hexo-theme-laughing/page_background.jpg
+page_menu_button: dark
+post_background: http://callfiles.ueibo.com/hexo-theme-laughing/post_background.jpg
+post_menu_button: light
+title_plancehold: 技术博客
+author:
+  head: https://avatars1.githubusercontent.com/u/15698499?s=460&v=4
+  signature: 千呼万唤始出来，犹抱琵琶半遮面.
+navication:
+  - name: Github
+    link: https://github.com/mugongxu
+  - name: V2EX
+    link: https://www.v2ex.com/
+  - name: 酷猫
+    link: http://m.xuguoqian.com/
+# content
+content_width: 800
+# Footer
+## Social icon list: [facebook, twitter, weibo, wechat, github, stackoverflow, linkin, email, segmentfault, flickr, zhihu, disqus, douban, bilibili]
+social:
+  - name: Github
+    icon: github
+    link: https://github.com/BoizZ
+  - name: Weibo
+    icon: weibo
+    link: https://weibo.com/heqibang
+  - name: SegmentFault
+    icon: segmentfault
+    link: https://www.segmentfault.com/u/bon
+# Duoshuo
+duoshuo:
+  enable: false
+  siteName: ueibo
+# Copyright
+copyright:
+  record: false
+  hexo: false
+  laughing: false
