@@ -95,3 +95,79 @@ jQuery.fn.extend({
 	}
 });
 ``````
+
+### 手动实现
+
+``````js
+function Parent(name) {
+	this.name = name;
+	this.funList = [];
+	this.index = 0;
+	this.timer = null;
+	this.runIndex = 0;
+}
+
+Parent.prototype.sleep = function (time) {
+    // 睡眠时间
+    if (this.funList[this.index] && typeof this.funList[this.index].fun != 'function') {
+        time += this.funList[this.index].time;
+    }
+    this.funList[this.index] = {
+        fun: null,
+        time: time
+    };
+    return this;
+}
+
+Parent.prototype.run = function (fun) {
+    if (this.funList[this.index] && typeof this.funList[this.index].fun != 'function') {
+        this.funList[this.index].fun = fun;
+        this.index++;
+    } else {
+        this.index++;
+        this.funList[this.index] = {
+            time: 0,
+            fun: fun
+        };
+    }
+    console.log(this.funList);
+    this.start();
+}
+
+Parent.prototype.start = function () {
+    var self = this;
+    if (this.timer) return;
+    var startFn = function (funList, index) {
+        if (!funList[index]) {
+            clearTimeout(self.timer)
+            return false;
+        }
+        var time = funList[index].time;
+        var fun = funList[index].fun;
+        typeof fun == 'function' || (fun = function () {});
+        self.timer = setTimeout(function () {
+            fun();
+            self.runIndex++;
+            startFn(funList, ++index);
+        }, time);
+    };
+    startFn(this.funList, this.runIndex);
+}
+       
+Parent.prototype.sayHi = function (msg) {
+    var fun = function () {
+       	if (!msg) return;
+       	console.log(msg);
+    }
+    this.run(fun);
+    return this;
+}
+
+var start = function (name) {
+    console.log(name);
+    return new Parent(name);
+}
+
+console.log(start('许国前').sleep(2000).sayHi('你好').sleep(2000).sayHi('我不好'));
+
+``````
