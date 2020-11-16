@@ -82,6 +82,7 @@ sudo firewall-cmd --reload
 在浏览器中访问`http://<jenkins_host_ip>:8080`确认是否可以打开Jenkins的`Getting Started`页面。
 运行`sudo cat /var/lib/jenkins/secrets/initialAdminPassword`，复制Jenkins初始密码，输入到Jenkins的Getting Started页面来`Unlock Jenkins`。
 
+
 ## 配置Jenkins
 这里一般使用推荐插件进行安装，等待Jenkins插件安装完成。
 
@@ -91,3 +92,17 @@ sudo firewall-cmd --reload
 ![图片](./jenkins.png)
 
 创建Jenkins的管理员账号，用该账号来登录Jenkins继续其它配置
+
+
+## 卸载Jenkins
+
+```
+// 卸载rpm方式安装的jenkins
+rpm -e jenkins
+
+// 检查是否卸载成功
+rpm -ql jenkins
+
+// 彻底删除残留文件
+find / -iname jenkins | xargs -n 1000 rm -rf
+```
