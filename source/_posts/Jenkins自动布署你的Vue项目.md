@@ -16,7 +16,7 @@ tags:
 新建任务-》构建一个自由风格的软件项目
 ![构建一个自由风格的软件项目](./add_project.png)
 
-### Jenkins关联Github项目地址
+## Jenkins关联Github项目地址
 进入新建的任务，点击`配置`，进行一下配置操作：
 1. github项目路径配置
 ![关联github](./link_github.png)
@@ -44,7 +44,7 @@ c.LOG打印：
 
 到这里已经实现了本地代码提交到github，然后在jenkins上点击构建，可以`拉取代码并且打包`，下一步实现打包后的`dist(build)`目录放到`目标服务器`上。
 
-### 部署到目标服务器
+## 部署到目标服务器
 
 1. 安装Publish Over SSH 插件
 安装完插件后，在系统管理-> 系统设置-> Publish over SSH 里设置服务器相关信息
@@ -80,7 +80,7 @@ Timeout (ms)：超时时间（毫秒）默认300000
 
 3. 修改任务的构建shell
 我的视图 -> 当前项目任务 -> 配置 -> 构建：
-构建shell增加将build目录下所有文件打包（Vue项目为dist目录下）
+构建shell增加将`build`目录下所有文件打包（Vue项目为`dist`目录下）
 构建shell命令：
 ```shell
 #!/bin/bash
@@ -111,4 +111,18 @@ rm -rf build.tar.gz
 
 接下来实现开发本地push代码到github上后，触发Webhook，jenkins自动执行构建。
 
-### 触发Webhook，jenkins自动执行构建
+## 触发Webhook，jenkins自动执行构建
+步骤：
+1. jenkins安装Generic Webhook Trigger 插件
+2. github添加触发器
+
+在之前的kgmusic工程任务 -》 配置 -》 构建触发器，选择Generic Webhook Trigger
+![webhook_trigger](./webhook_trigger.png)
+![webhook_trigger_config](./webhook_trigger_config.png)
+填写token（随便填写）
+
+选择github项目中的Settings -》 Webhooks>add webhook
+配置方式按上图红框中的格式，选择在push代码时触发webhook，成功后会在下方出现一个绿色的小勾勾
+![github_hook](./github_hook.png)
+
+简单的jenkins结合github的自动化发版流程就搭建完了。看个人需求了，手动触发构建就不需要Webhook了，如果是监听`特有分支(master)`的`push`行为，就可以使用Webhook自动构建。
